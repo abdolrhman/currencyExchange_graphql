@@ -34,7 +34,6 @@ export class CurrenciesProvider extends DataSource {
     Object.keys(currencyChangeRates.rates).forEach(key => {
       currencyChangeRates.rates[key] = currencyChangeRates.rates[key] * value
     })
-    console.log('cuu', currencyChangeRates);
     return currencyChangeRates;
   }
 
