@@ -2,22 +2,6 @@ import { DataSource } from 'apollo-datasource';
 import axios from 'axios';
 import { QueryCurrencyArgs } from './generated/graphql';
 
-// This is a (sample) collection of currencies we'll be able to query
-// the GraphQL server for.  A more complete example might fetch
-// from an existing data source like a REST API or database.
-// const currencies = [
-//   {
-//     id: 0,
-//     title: 'Harry Potter and the Chamber of Secrets',
-//     author: 'J.K. Rowling'
-//   },
-//   {
-//     id: 1,
-//     title: 'Jurassic Park',
-//     author: 'Michael Crichton'
-//   }
-// ];
-
 async function getData (currency = '') {
   return axios.get(`https://api.exchangeratesapi.io/latest?base=${currency}`);
 }
