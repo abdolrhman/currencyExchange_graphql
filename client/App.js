@@ -1,30 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { ApolloProvider } from '@apollo/client';
-import { client } from './DataSource';
-import { ExchangeRates } from './componenets/ExchangeRates';
-import { Input } from 'react-native-elements';
+import {StatusBar} from 'expo-status-bar';
+import React, {Component, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
+
+import {ApolloProvider, useQuery, gql} from '@apollo/client';
+import {client} from './DataSource';
+import ExchangeRates from './componenets/ExchangeRates';
+import {Input} from "react-native-elements";
 
 export default class App extends Component {
-  setState(state, callback) {
-    super.setState(state, callback);
-    this.state = { data: '' }
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '',
+      currency: 'USD'
+    }
   }
-
 
   render() {
     return (
       <ApolloProvider client={client}>
         <View style={styles.container}>
           <Input
-            placeholder='Comment'
-            leftIcon={{ type: 'font-awesome', name: 'comment' }}
-            style={styles}
-            onChangeText={value => this.setState({ comment: value })}
+            placeholder='Value'
+            keyboardType='numeric'
+            leftIcon={{type: 'font-awesome', name: 'money'}}
+            onChangeText={value => this.setState({onChangeText: value})}
           />
-          <ExchangeRates />
-          <StatusBar style='auto' />
+          <Picker
+            selectedValue={this.state.language}
+            style={{height: 50, width: 100}}
+            onValueChange={(itemValue, itemIndex) =>
+              this.setState({language: itemValue})
+            }>
+            <Picker.Item label="Java" value="java"/>
+            <Picker.Item label="JavaScript" value="js"/>
+          </Picker>
+          <p>{this.state.onChangeText}</p>
+          <ExchangeRates/>
+          <StatusBar style='auto'/>
         </View>
       </ApolloProvider>
 
@@ -36,7 +50,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#414450',
+    backgroundColor: '#d4d6dc',
     alignItems: 'center',
     justifyContent: 'center'
   }
