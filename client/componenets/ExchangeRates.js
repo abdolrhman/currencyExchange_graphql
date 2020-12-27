@@ -2,7 +2,7 @@ import {gql, useQuery} from "@apollo/client";
 import React from 'react';
 
 const EXCHANGE_RATES = gql`
-    query GetRates ($currency: String, $value: Int){
+    query GetRates ($currency: String!, $value: Int!){
         currency(currency: $currency, value: $value) {
             base,
             date,
@@ -16,7 +16,11 @@ const EXCHANGE_RATES = gql`
 `;
 
 const ExchangeRates = () => {
-  const {loading, error, data} = useQuery(EXCHANGE_RATES);
+  const currency = 'USD';
+  const value = 1;
+  const {loading, error, data} = useQuery(EXCHANGE_RATES, {
+    variables: { currency, value }
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
