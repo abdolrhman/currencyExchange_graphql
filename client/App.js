@@ -12,7 +12,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: 1,
       currency: 'USD'
     }
   }
@@ -25,19 +25,24 @@ export default class App extends Component {
             placeholder='Value'
             keyboardType='numeric'
             leftIcon={{type: 'font-awesome', name: 'money'}}
-            onChangeText={value => this.setState({onChangeText: value})}
+            textAlign={'center'}
+            style={{alignSelf: 'center'}}
+            onChangeText={value => this.setState({value})}
           />
           <Picker
-            selectedValue={this.state.language}
+            selectedValue={this.state.currency}
             style={{height: 50, width: 100}}
             onValueChange={(itemValue, itemIndex) =>
-              this.setState({language: itemValue})
+              this.setState({currency: itemValue})
             }>
-            <Picker.Item label="Java" value="java"/>
-            <Picker.Item label="JavaScript" value="js"/>
+            <Picker.Item label="USD" value="USD"/>
+            <Picker.Item label="EUR" value="EUR"/>
+            <Picker.Item label="PHP" value="PHP"/>
+            <Picker.Item label="HRK" value="HRK"/>
+            <Picker.Item label="BGN" value="BGN"/>
           </Picker>
           <p>{this.state.onChangeText}</p>
-          <ExchangeRates/>
+          <ExchangeRates currency={this.state.currency} value={this.state.value}/>
           <StatusBar style='auto'/>
         </View>
       </ApolloProvider>

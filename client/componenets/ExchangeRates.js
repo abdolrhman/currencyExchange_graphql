@@ -8,16 +8,19 @@ const EXCHANGE_RATES = gql`
             date,
             rates {
                 TRY,
-                CZK
+                CZK,
+                PHP,
+                HRK,
+                BGN
             }
         }
     }
 
 `;
 
-const ExchangeRates = () => {
-  const currency = 'USD';
-  const value = 1;
+const ExchangeRates = (props) => {
+  const currency = props.currency;
+  const value = parseInt(props.value);
   const {loading, error, data} = useQuery(EXCHANGE_RATES, {
     variables: { currency, value }
   });
