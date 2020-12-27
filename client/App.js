@@ -5,7 +5,7 @@ import {Picker} from '@react-native-picker/picker';
 
 import {ApolloProvider, useQuery, gql} from '@apollo/client';
 import {client} from './DataSource';
-import ExchangeRates from './componenets/ExchangeRates';
+import {ExchangeRates} from './componenets/ExchangeRates';
 import {Input} from "react-native-elements";
 
 export default class App extends Component {

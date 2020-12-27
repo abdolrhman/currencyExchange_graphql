@@ -22,7 +22,7 @@ const ExchangeRates = (props) => {
   const currency = props.currency;
   const value = parseInt(props.value);
   const {loading, error, data} = useQuery(EXCHANGE_RATES, {
-    variables: { currency, value }
+    variables: {currency, value}
   });
 
   if (loading) return <p>Loading...</p>;
@@ -39,4 +39,4 @@ const ExchangeRates = (props) => {
 }
 
 
-export default ExchangeRates
+export {ExchangeRates, EXCHANGE_RATES}
